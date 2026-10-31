@@ -10,7 +10,7 @@ Stack: Vite 6 · React 19 · TypeScript · React Router 6. Plain CSS with design
 npm install
 npm run dev       # http://localhost:5173
 npm run build     # type-check + production build into dist/
-npm run preview   # serve the built site
+npm run preview   # serve the built site at http://localhost:4173/wilvalglobal-website/
 ```
 
 ## Structure
@@ -48,5 +48,9 @@ src/
 1. **Rates** — set real prices in `src/data/site.ts` → `rates`, then `confirmed: true` (removes the "Sample rates" badge).
 2. **Placeholders** — search the code for `<Ph>` or `[` to find copy to confirm: yard hours, pickup minimum, payment method, founding story, milestones, CEO quote, bag sizes, programme counts, impact figures, partner reply time, map pin.
 3. **Forms** — `FormShell` only logs submissions. Pass an `onSubmit` that POSTs to your backend (e.g. a small FastAPI or Spring Boot endpoint that emails info@wilvalglobal.com) or a form service.
-4. **Hosting** — it's a single-page app: configure the host to serve `index.html` for unknown paths (Netlify `_redirects`: `/* /index.html 200`; Vercel does this automatically for Vite).
+4. **Hosting (GitHub Pages)** — `.github/workflows/deploy.yml` builds and deploys on every push to `main`.
+   In the repo: Settings → Pages → Source: **GitHub Actions**. The site is served at
+   https://devguywilly.github.io/wilvalglobal-website/ (`base` in `vite.config.ts`). The build copies `index.html` to
+   `404.html` so deep links like `/sell` work. When you point a custom domain (wilvalglobal.com) at Pages, add a
+   `public/CNAME` file containing the domain and set the repo variable / env `VITE_BASE=/`.
 5. **Logo** — the logos are raster files recovered from Facebook. Commission a vector (SVG) redraw for print.
